@@ -137,7 +137,7 @@ export default function ProjectsSection() {
               {/* ─── Right Column: Visual Mockup Overflow ─── */}
               <div className="relative h-[300px] sm:h-[400px] lg:h-auto w-full lg:translate-y-8 translate-y-4">
                 {/* Simulated MacBook/Window Frame */}
-                <div className="absolute top-0 right-0 w-full h-full lg:w-[120%] lg:h-[110%] rounded-xl overflow-hidden bg-[#0d121c] border border-white/10 shadow-2xl transition-transform duration-500 group-hover:-translate-y-2 group-hover:shadow-black/70">
+                <div className="absolute top-0 right-0 w-full h-full 2xl:w-[120%] 2xl:h-[110%] rounded-xl overflow-hidden bg-[#0d121c] border border-white/10 shadow-2xl transition-transform duration-500 group-hover:-translate-y-2 group-hover:shadow-black/70">
                   {/* Top Bar */}
                   <div className="h-8 w-full bg-[#1e2536] flex items-center px-4 gap-2 border-b border-white/5">
                     <div className="h-3 w-3 rounded-full bg-red-500/80" />

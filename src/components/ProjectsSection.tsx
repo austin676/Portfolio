@@ -61,7 +61,7 @@ export default function ProjectsSection() {
   return (
     <section className="relative w-full bg-[#020813] py-12 md:py-24 px-6 md:px-16 overflow-hidden">
       <div className="mx-auto max-w-[1400px] space-y-12 md:space-y-16">
-        {projects.map((project, index) => (
+        {projects.map((project) => (
           <motion.div
             key={project.title}
             variants={cardReveal}
@@ -73,8 +73,8 @@ export default function ProjectsSection() {
           >
             {/* Animated Border Background */}
             <div className="absolute inset-0 rounded-[20px] bg-[#1a1f2e] overflow-hidden pointer-events-none">
-              {/* Single Synchronized Spinning Wrapper */}
-              <div className="absolute top-1/2 left-1/2 aspect-square w-[200%] origin-center -translate-x-1/2 -translate-y-1/2 animate-[spin_4s_linear_infinite] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              {/* Single Synchronized Spinning Wrapper — paused by default, plays on hover */}
+              <div className="absolute top-1/2 left-1/2 aspect-square w-[200%] origin-center -translate-x-1/2 -translate-y-1/2 animate-[spin_4s_linear_infinite] [animation-play-state:paused] group-hover:[animation-play-state:running] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                 {/* Blurred Glow Beam */}
                 <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0_240deg,rgba(232,226,213,1)_360deg)] blur-md" />
                 {/* Core Sharp Beam */}
@@ -152,6 +152,7 @@ export default function ProjectsSection() {
                         alt={`${project.title} Interface`}
                         fill
                         className="object-cover object-top"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     ) : (
                       <span className="text-neutral-700 font-mono text-[15px] uppercase tracking-widest z-10">

@@ -40,11 +40,10 @@ const containerVariants = {
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 50, rotateX: 15 },
+  hidden: { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
     y: 0,
-    rotateX: 0,
     transition: {
       duration: 1,
       ease: [0.16, 1, 0.3, 1] as const,
@@ -62,7 +61,6 @@ export default function CertsStrip() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        style={{ perspective: "1200px" }}
       >
         {credentials.map((cred) => {
           const Icon = cred.icon;
@@ -75,7 +73,7 @@ export default function CertsStrip() {
                 scale: 1.02,
                 transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] as const },
               }}
-              className="group relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-md px-8 py-16 md:py-20 text-center transition-all duration-500 hover:border-white/10 hover:bg-white/[0.08]"
+              className="group relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-white/[0.04] px-8 py-16 md:py-20 text-center transition-all duration-500 hover:border-white/10 hover:bg-white/[0.08]"
             >
               {/* Ambient glow on hover */}
               <div

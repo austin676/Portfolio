@@ -12,6 +12,10 @@ export default function CustomCursor() {
   const cursorXSpring = useSpring(mouseX, springConfig);
   const cursorYSpring = useSpring(mouseY, springConfig);
 
+  // Hoisted transforms — stable references, no re-creation per render
+  const dotX = useTransform(mouseX, (v) => v + 17);
+  const dotY = useTransform(mouseY, (v) => v + 17);
+
   useEffect(() => {
     // Hide native cursor
     document.body.style.cursor = "none";
@@ -44,9 +48,8 @@ export default function CustomCursor() {
       <motion.div
         className="fixed top-0 left-0 w-[11px] h-[11px] bg-white rounded-full pointer-events-none z-[101] mix-blend-difference"
         style={{
-          // Offset by 17px relative to the 20px mouse offset to perfectly center the 6x6 dot
-          x: useTransform(mouseX, (v) => v + 17),
-          y: useTransform(mouseY, (v) => v + 17),
+          x: dotX,
+          y: dotY,
         }}
       />
     </>

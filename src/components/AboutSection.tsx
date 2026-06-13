@@ -15,7 +15,7 @@ const skillDomains = [
     category: "Blockchain",
     items: ["Solidity", "Ethers.js", "MetaMask", "Ganache", "Thirdweb", "Polygon"],
   },
-  { category: "Tools", items: ["Git", "GitHub", "VS Code", "PowerShell"] },
+  { category: "Tools", items: ["Git", "GitHub", "VS Code", "Antigravity"] },
 ];
 
 // GPU-friendly reveal — opacity + translateY only, NO filter:blur (expensive paint)
@@ -134,11 +134,11 @@ export default function AboutSection() {
               className="mb-8 text-[24px] leading-[1.75] text-neutral-400 md:text-[26px] lg:text-[30px]"
             >
               Off-screen, I compete in{" "}
-              <span className="text-[#e8e2d5] font-semibold">PUBG</span> &{" "}
-              <span className="text-[#e8e2d5] font-semibold">Valorant</span>{" "}
-              ranked lobbies and draw creative fuel from{" "}
+              <span className="text-[#e8e2d5] font-semibold">Football</span> &{" "}
+              <span className="text-[#e8e2d5] font-semibold">Sprinting</span>{" "}
+              and draw discipline from the competitive spirit of{" "}
               <span className="text-[#e8e2d5] font-semibold">
-                anime subculture
+                Sports
               </span>
               .
             </motion.p>

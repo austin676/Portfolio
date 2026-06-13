@@ -5,9 +5,33 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const words = ["Innovating.", "Empowering.", "Delivering."];
 
+// Hoisted outside component — no re-creation on state changes
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.4,
+    }
+  },
+  exit: {
+    opacity: 0,
+    y: -20,
+    transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] as const }
+  }
+};
+
+const wordVariants = {
+  hidden: { y: "100%", opacity: 0 },
+  show: { 
+    y: "0%", 
+    opacity: 1, 
+    transition: { duration: 1.5, ease: [0.76, 0, 0.24, 1] as const } 
+  }
+};
+
 export default function LoadingScreen() {
   const [isMounted, setIsMounted] = useState(false);
-  const [shouldShow, setShouldShow] = useState(true);
+  const [shouldShow] = useState(true);
   const [stage, setStage] = useState<"words" | "dot" | "blast" | "done">("words");
 
   // 1. Hydration & Storage Safe
@@ -56,29 +80,6 @@ export default function LoadingScreen() {
   // If already loaded or not mounted, return null with zero visual delay
   if (!isMounted || !shouldShow || stage === "done") return null;
 
-  const containerVariants = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.4,
-      }
-    },
-    exit: {
-      opacity: 0,
-      y: -20,
-      transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] as const }
-    }
-  };
-  
-  const wordVariants = {
-    hidden: { y: "100%", opacity: 0 },
-    show: { 
-      y: "0%", 
-      opacity: 1, 
-      transition: { duration: 1.5, ease: [0.76, 0, 0.24, 1] as const } 
-    }
-  };
-
   return (
     <div className="fixed inset-0 z-[999] flex items-center justify-center bg-[#020813] overflow-hidden">
       
@@ -112,8 +113,8 @@ export default function LoadingScreen() {
           className="absolute bg-[#e8e2d5]"
           initial={{ clipPath: "circle(0% at 50% 50%)" }}
           animate={{
-            clipPath: stage === "blast" ? "circle(150% at 50% 50%)" : "circle(0.4% at 50% 50%)",
-            opacity: stage === "blast" ? [1, 1, 0] : 1, // Fade out the white blast at the very end to expose portfolio smoothly
+            clipPath: stage === "blast" ? "circle(100% at 50% 50%)" : "circle(0.4% at 50% 50%)",
+            opacity: stage === "blast" ? [1, 1, 0] : 1,
           }}
           transition={{
             duration: stage === "blast" ? 1 : 0.4,

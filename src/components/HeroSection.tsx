@@ -1,22 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
 export default function HeroSection() {
-  const [delayMultiplier, setDelayMultiplier] = useState(1);
-
-  useEffect(() => {
-    // Syncs with LoadingScreen: if the user has already loaded the site,
-    // skip the entrance delays so the content appears instantly.
-    // TEMPORARILY DISABLED FOR DEVELOPMENT to match LoadingScreen!
-    /*
-    if (sessionStorage.getItem("hasLoaded")) {
-      setDelayMultiplier(0);
-    }
-    */
-  }, []);
+  // Fixed at 1 for now — when sessionStorage logic is re-enabled,
+  // convert back to state: const [delayMultiplier, setDelayMultiplier] = useState(1);
+  const delayMultiplier = 1;
 
   return (
     <section className="noise-overlay relative w-full h-screen overflow-hidden bg-[#0a0a0a]">
@@ -28,10 +18,10 @@ export default function HeroSection() {
         className="absolute inset-0 z-0"
       >
         <Image
-          src="/bg.jpg" // We will place the uploaded image here
+          src="/bg.jpg"
           alt="Bokeh Background"
           fill
-          className="object-cover opacity-60" // Lowered opacity slightly so text remains readable
+          className="object-cover opacity-60"
           priority
         />
       </motion.div>
@@ -45,7 +35,7 @@ export default function HeroSection() {
       >
         {/* Blob 1 — top-center dominant spotlight */}
         <div
-          className="animate-spotlight-1 absolute -top-[30%] left-[10%] h-[120vh] w-[120vh] rounded-full"
+          className="animate-spotlight-1 absolute -top-[30%] left-[10%] h-[80vh] w-[80vh] rounded-full will-change-transform"
           style={{
             background:
               "radial-gradient(circle, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 40%, transparent 70%)",
@@ -53,7 +43,7 @@ export default function HeroSection() {
         />
         {/* Blob 2 — right-center secondary */}
         <div
-          className="animate-spotlight-2 absolute top-[10%] -right-[20%] h-[100vh] w-[100vh] rounded-full"
+          className="animate-spotlight-2 absolute top-[10%] -right-[20%] h-[80vh] w-[80vh] rounded-full will-change-transform"
           style={{
             background:
               "radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 40%, transparent 70%)",
@@ -61,16 +51,13 @@ export default function HeroSection() {
         />
         {/* Blob 3 — bottom-left fill */}
         <div
-          className="animate-spotlight-3 absolute -bottom-[30%] -left-[20%] h-[90vh] w-[90vh] rounded-full"
+          className="animate-spotlight-3 absolute -bottom-[30%] -left-[20%] h-[80vh] w-[80vh] rounded-full will-change-transform"
           style={{
             background:
               "radial-gradient(circle, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 40%, transparent 70%)",
           }}
         />
       </motion.div>
-
-
-
 
       {/* ─── Typography Layer (Center Focus) ─── */}
       <div className="relative z-10 flex h-full w-full items-center justify-center -translate-y-12 md:-translate-y-20">
@@ -123,7 +110,7 @@ export default function HeroSection() {
                     alt="Austin Sharma — Developer Portrait"
                     fill
                     className="object-cover grayscale brightness-[0.85] transition-all duration-[400ms] ease-[ease] group-hover:grayscale-0 group-hover:brightness-100"
-                    sizes="(max-width: 68px) 320px, 280px"
+                    sizes="(max-width: 768px) 220px, 280px"
                     priority
                   />
                 </div>
@@ -154,7 +141,7 @@ export default function HeroSection() {
       >
         {/* Bottom-Left */}
         <p className="max-w-[320px] text-[14px] font-medium leading-relaxed text-neutral-300 md:max-w-[400px] md:text-[15px] lg:max-w-[520px] lg:text-[27px]">
-          I am currently looking for oppurnities to grow and showcase my skills.
+          I am currently looking for opportunities to grow and showcase my skills.
         </p>
 
         {/* Bottom-Right */}

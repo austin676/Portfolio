@@ -5,10 +5,12 @@ import CustomCursor from "@/components/CustomCursor";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 
-// Initialize crisp sans-serif font
+// Initialize crisp sans-serif font with CSS variable for reliable production rendering
 const plusJakarta = Plus_Jakarta_Sans({ 
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-plus-jakarta",
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
@@ -22,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${plusJakarta.className} antialiased`}>
+    <html lang="en" className={plusJakarta.variable}>
+      <body className="font-sans antialiased">
         {/* Mounts instantly, handles its own sessionStorage logic */}
         <LoadingScreen />
         

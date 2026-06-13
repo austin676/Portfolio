@@ -137,10 +137,10 @@ export default function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 4.1 * delayMultiplier, duration: 1.5 }}
-        className="absolute bottom-0 left-0 right-0 z-20 flex flex-col gap-4 p-6 md:flex-row md:items-end md:justify-between md:px-12 md:py-10 lg:px-16 lg:py-12"
+        className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 flex flex-col gap-4 p-6 md:flex-row md:items-end md:justify-between md:px-12 md:py-10 lg:px-16 lg:py-12"
       >
         {/* Bottom-Left */}
-        <p className="max-w-[320px] text-[14px] font-medium leading-relaxed text-neutral-300 md:max-w-[400px] md:text-[15px] lg:max-w-[450px] lg:text-[25px]">
+        <p className="max-w-[320px] text-[14px] font-medium leading-relaxed text-neutral-300 md:max-w-[400px] md:text-[15px] lg:max-w-[420px] lg:text-[25px]">
           I am currently looking for opportunities to grow and showcase my skills.
         </p>
 

@@ -13,7 +13,7 @@ export default function Navbar() {
       transition={{ delay: 3.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="pointer-events-none fixed top-0 left-0 w-full z-50 bg-transparent"
     >
-      <div className="flex w-full items-center justify-between p-4 md:px-8 md:py-5">
+      <div className="flex w-full items-center justify-between p-5 md:px-8 md:py-6">
         {/* ─── Left: Resume Capsule ─── */}
         <a
           href="/Austin_Sharma_Resume.pdf"

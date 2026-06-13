@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const words = ["Innovating.", "Empowering.", "Delivering."];
+const words = ["Sleep.", "Optional.", "Apparently."];
 
 // Hoisted outside component — no re-creation on state changes
 const containerVariants = {

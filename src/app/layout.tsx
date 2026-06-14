@@ -65,7 +65,7 @@ export const viewport: Viewport = {
 
 // Runs before first paint to set the persisted theme on <html>, preventing a
 // flash of the wrong theme for returning/light-mode visitors.
-const themeInitScript = `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t='light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
+const themeInitScript = `(function(){try{document.documentElement.setAttribute('data-theme','light');}catch(e){}})();`;
 
 export default function RootLayout({
   children,

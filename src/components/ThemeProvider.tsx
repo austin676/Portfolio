@@ -26,12 +26,9 @@ export default function ThemeProvider({
   const [theme, setTheme] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
 
-  // On mount: use the saved preference, otherwise default to light
+  // Always start in light mode on every load, regardless of any saved
+  // preference. The toggle still switches themes within the session.
   useEffect(() => {
-    const stored = localStorage.getItem("theme") as Theme | null;
-    if (stored === "light" || stored === "dark") {
-      setTheme(stored);
-    }
     setMounted(true);
   }, []);
 

@@ -73,9 +73,8 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 120, clipPath: "inset(100% 0% -10% 0%)" }}
             animate={{ opacity: 1, y: 0, clipPath: "inset(0% 0% -10% 0%)" }}
             transition={{ delay: 2.5 * delayMultiplier, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="font-black tracking-[-0.04em]"
+            className="font-black tracking-[-0.04em] text-[clamp(5rem,28vw,12rem)] md:text-[clamp(3.5rem,min(20vw,32vh),12rem)]"
             style={{
-              fontSize: "clamp(3.5rem, min(20vw, 32vh), 12rem)",
               lineHeight: "0.82",
               color: "var(--text-hero)",
             }}

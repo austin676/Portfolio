@@ -80,6 +80,14 @@ export default function FooterSection() {
           >
             X
           </a>
+          <a
+            href="https://instagram.com/austin.sharma_"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-neutral-400 hover:text-white uppercase tracking-wider text-sm md:text-base font-semibold transition-colors duration-300"
+          >
+            Instagram
+          </a>
         </div>
       </motion.div>
 

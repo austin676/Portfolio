@@ -2,6 +2,42 @@
 
 import { motion } from "framer-motion";
 import { Trophy, MapPin, Calendar, GraduationCap } from "lucide-react";
+import { useEffect, useState } from "react";
+
+function Typewriter({ text }: { text: string }) {
+  const [index, setIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    // Pause at the end of the word before erasing, and at the start before retyping.
+    const atEnd = !deleting && index === text.length;
+    const atStart = deleting && index === 0;
+    const delay = atEnd ? 2600 : atStart ? 900 : deleting ? 150 : 250;
+
+    const timeout = setTimeout(() => {
+      if (atEnd) {
+        setDeleting(true);
+      } else if (atStart) {
+        setDeleting(false);
+      } else {
+        setIndex((i) => i + (deleting ? -1 : 1));
+      }
+    }, delay);
+
+    return () => clearTimeout(timeout);
+  }, [index, deleting, text]);
+
+  return (
+    <span aria-label={text}>
+      <span aria-hidden="true">{text.slice(0, index)}</span>
+      <span
+        aria-hidden="true"
+        className="inline-block w-[0.06em] -mb-[0.05em] ml-[0.05em] self-stretch animate-pulse"
+        style={{ backgroundColor: "currentColor", height: "0.9em" }}
+      />
+    </span>
+  );
+}
 
 export default function EducationSection() {
   return (
@@ -21,10 +57,10 @@ export default function EducationSection() {
           className="text-center"
         >
           <h2
-            className="font-black tracking-tighter text-4xl md:text-6xl mb-12 md:mb-16 uppercase"
+            className="font-black tracking-tighter text-4xl md:text-6xl mb-12 md:mb-16 uppercase inline-flex items-center"
             style={{ color: "var(--text-heading)" }}
           >
-            Building Since 2023.
+            Building Since&nbsp;<Typewriter text="2023." />
           </h2>
         </motion.div>
 

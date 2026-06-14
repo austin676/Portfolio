@@ -57,6 +57,22 @@ export default function CertsStrip() {
       className="relative w-full py-16 px-6 md:px-16"
       style={{ backgroundColor: "var(--bg-primary)" }}
     >
+      {/* ─── Top Structural Typography ─── */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as const }}
+        className="pb-14 text-center"
+      >
+        <span
+          className="text-[19px] font-medium uppercase tracking-[0.3em] md:text-[21px]"
+          style={{ color: "var(--text-body)" }}
+        >
+          Credentials and Recognition
+        </span>
+      </motion.div>
+
       {/* ─── Grid Strip ─── */}
       <motion.div
         className="mx-auto max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-14"
@@ -128,22 +144,6 @@ export default function CertsStrip() {
             </motion.div>
           );
         })}
-      </motion.div>
-
-      {/* ─── Bottom Structural Typography ─── */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
-        className="pt-14 pb-4 text-center"
-      >
-        <span
-          className="text-[19px] font-medium uppercase tracking-[0.3em] md:text-[21px]"
-          style={{ color: "var(--text-body)" }}
-        >
-          Credentials and Recognition
-        </span>
       </motion.div>
     </section>
   );

@@ -75,8 +75,8 @@ export default function HeroSection() {
             transition={{ delay: 2.5 * delayMultiplier, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             className="font-black tracking-[-0.04em]"
             style={{
-              fontSize: "clamp(6rem, min(20vw, 38vh), 20vw)",
-              lineHeight: "0.7",
+              fontSize: "clamp(3.5rem, min(18vw, 38vh), 20vw)",
+              lineHeight: "0.8",
               color: "var(--text-hero)",
             }}
           >

@@ -2,9 +2,116 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════
+   DARK THEME (default)
+   ═══════════════════════════════════════════ */
 :root {
+  /* Backgrounds */
+  --bg-primary: #020813;
+  --bg-secondary: #0a0a0a;
+  --bg-footer: #000000;
+  --bg-card: #1a1f2e;
+  --bg-card-hover: #1d2335;
+  --bg-card-inner: #0d121c;
+  --bg-pill: rgba(23, 23, 23, 0.5);
+  --bg-cert: rgba(255, 255, 255, 0.04);
+  --bg-cert-hover: rgba(255, 255, 255, 0.08);
+  --bg-icon-box: rgba(38, 38, 38, 0.5);
+  --bg-badge: rgba(0, 0, 0, 0.4);
+  --bg-mobile-menu: rgba(0, 0, 0, 0.8);
+
+  /* Text */
+  --text-heading: #e8e2d5;
+  --text-hero: #dfdcd6;
+  --text-body: #a3a3a3;
+  --text-muted: #737373;
+  --text-dim: #525252;
+
+  /* Borders */
+  --border-main: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(64, 64, 64, 0.6);
+  --border-card: rgba(255, 255, 255, 0.05);
+
+  /* Navbar */
+  --nav-text: #e5e5e5;
+  --nav-border: #ffffff;
+  --nav-hover-bg: #ffffff;
+  --nav-hover-text: #000000;
+
+  /* Loading */
+  --loading-bg: #020813;
+  --loading-blast: #e8e2d5;
+
+  /* Misc */
+  --watermark-opacity: 0.02;
+  --divider-color: rgba(38, 38, 38, 0.6);
+  --spotlight-opacity: 1;
+  --noise-opacity: 0.05;
+  --hero-img-opacity: 0.6;
+  --card-beam-opacity: 0;
+  --project-topbar: #1e2536;
+  --project-frame-bg: #0d121c;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+
+  /* Legacy compat */
   --background: #0d0d0d;
   --foreground: #dfdcd6;
+}
+
+/* ═══════════════════════════════════════════
+   LIGHT THEME
+   ═══════════════════════════════════════════ */
+[data-theme="light"] {
+  /* Backgrounds - Champagne Gold & Sand */
+  --bg-primary: #EFE8D8;
+  --bg-secondary: #E5DEC9;
+  --bg-footer: #020813;
+  --bg-card: #FDFBF7;
+  --bg-card-hover: #FFFFFF;
+  --bg-card-inner: #F5EFE0;
+  --bg-pill: #E5DEC9;
+  --bg-cert: rgba(253, 251, 247, 0.6);
+  --bg-cert-hover: rgba(255, 255, 255, 0.9);
+  --bg-icon-box: rgba(15, 23, 42, 0.05);
+  --bg-badge: rgba(239, 232, 216, 0.95);
+  --bg-mobile-menu: rgba(239, 232, 216, 0.98);
+
+  /* Text - Rich Navy Blue */
+  --text-heading: #0F172A;
+  --text-hero: #0F172A;
+  --text-body: #1E293B;
+  --text-muted: #334155;
+  --text-dim: #475569;
+
+  /* Borders - Navy tinted */
+  --border-main: rgba(15, 23, 42, 0.15);
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-card: rgba(15, 23, 42, 0.12);
+
+  /* Navbar */
+  --nav-text: #0F172A;
+  --nav-border: #0F172A;
+  --nav-hover-bg: #0F172A;
+  --nav-hover-text: #EFE8D8;
+
+  /* Loading */
+  --loading-bg: #EFE8D8;
+  --loading-blast: #0F172A;
+
+  /* Misc */
+  --watermark-opacity: 0.04;
+  --divider-color: rgba(15, 23, 42, 0.1);
+  --spotlight-opacity: 0;
+  --noise-opacity: 0;
+  --hero-img-opacity: 0.2;
+  --card-beam-opacity: 0;
+  --project-topbar: #E5DEC9;
+  --project-frame-bg: #FDFBF7;
+  --shadow-color: rgba(15, 23, 42, 0.15);
+
+  /* Legacy compat */
+  --background: #EFE8D8;
+  --foreground: #0F172A;
 }
 
 html,
@@ -36,7 +143,7 @@ body::-webkit-scrollbar {
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    opacity: 0.05; /* slightly increased for visibility */
+    opacity: var(--noise-opacity);
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 400px 400px;

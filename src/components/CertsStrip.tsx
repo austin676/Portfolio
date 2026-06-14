@@ -53,7 +53,10 @@ const cardVariants = {
 
 export default function CertsStrip() {
   return (
-    <section className="relative w-full bg-[#020813] py-16 px-6 md:px-16">
+    <section
+      className="relative w-full py-16 px-6 md:px-16"
+      style={{ backgroundColor: "var(--bg-primary)" }}
+    >
       {/* ─── Grid Strip ─── */}
       <motion.div
         className="mx-auto max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-14"
@@ -73,7 +76,19 @@ export default function CertsStrip() {
                 scale: 1.02,
                 transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] as const },
               }}
-              className="group relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border border-white/5 bg-white/[0.04] px-8 py-16 md:py-20 text-center transition-all duration-500 hover:border-white/10 hover:bg-white/[0.08]"
+              className="group relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border px-8 py-16 md:py-20 text-center transition-all duration-500"
+              style={{
+                borderColor: "var(--border-card)",
+                backgroundColor: "var(--bg-cert)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "var(--border-main)";
+                e.currentTarget.style.backgroundColor = "var(--bg-cert-hover)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--border-card)";
+                e.currentTarget.style.backgroundColor = "var(--bg-cert)";
+              }}
             >
               {/* Ambient glow on hover */}
               <div
@@ -81,20 +96,33 @@ export default function CertsStrip() {
               />
 
               {/* Icon */}
-              <div className="relative z-10 mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-neutral-700/40 bg-neutral-800/50 transition-all duration-500 group-hover:border-neutral-500/60 group-hover:bg-neutral-700/40 group-hover:shadow-lg group-hover:shadow-white/5">
+              <div
+                className="relative z-10 mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border transition-all duration-500 group-hover:shadow-lg"
+                style={{
+                  borderColor: "var(--border-subtle)",
+                  backgroundColor: "var(--bg-icon-box)",
+                }}
+              >
                 <Icon
-                  className="h-7 w-7 text-neutral-500 transition-colors duration-500 group-hover:text-white"
+                  className="h-7 w-7 transition-colors duration-500"
+                  style={{ color: "var(--text-muted)" }}
                   strokeWidth={1.5}
                 />
               </div>
 
               {/* Credential Title */}
-              <h3 className="relative z-10 mb-3 text-[19px] font-semibold leading-snug text-[#e8e2d5] transition-colors duration-500 group-hover:text-white md:text-[21px]">
+              <h3
+                className="relative z-10 mb-3 text-[19px] font-semibold leading-snug transition-colors duration-500 md:text-[21px]"
+                style={{ color: "var(--text-heading)" }}
+              >
                 {cred.title}
               </h3>
 
               {/* Issuing Org */}
-              <p className="relative z-10 text-[14px] font-medium uppercase tracking-[0.15em] text-neutral-600 transition-colors duration-500 group-hover:text-neutral-400 md:text-[15px]">
+              <p
+                className="relative z-10 text-[14px] font-medium uppercase tracking-[0.15em] transition-colors duration-500 md:text-[15px]"
+                style={{ color: "var(--text-dim)" }}
+              >
                 {cred.org}
               </p>
             </motion.div>
@@ -110,7 +138,10 @@ export default function CertsStrip() {
         transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
         className="pt-14 pb-4 text-center"
       >
-        <span className="text-[19px] font-medium uppercase tracking-[0.3em] text-neutral-300 md:text-[21px]">
+        <span
+          className="text-[19px] font-medium uppercase tracking-[0.3em] md:text-[21px]"
+          style={{ color: "var(--text-body)" }}
+        >
           Credentials and Recognition
         </span>
       </motion.div>

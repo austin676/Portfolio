@@ -59,7 +59,10 @@ const cardReveal = {
 
 export default function ProjectsSection() {
   return (
-    <section className="relative w-full bg-[#020813] py-12 md:py-24 px-6 md:px-16 overflow-hidden">
+    <section
+      className="relative w-full py-12 md:py-24 px-6 md:px-16 overflow-hidden"
+      style={{ backgroundColor: "var(--bg-primary)" }}
+    >
       <div className="mx-auto max-w-[1400px] space-y-12 md:space-y-16">
         {projects.map((project) => (
           <motion.div
@@ -69,19 +72,37 @@ export default function ProjectsSection() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.15 }}
             data-cursor-text="View Live"
-            className="relative w-full rounded-[20px] p-8 md:p-12 shadow-2xl shadow-black/50 overflow-visible group"
+            className="relative w-full rounded-[20px] p-8 md:p-12 shadow-2xl overflow-visible group"
+            style={{ boxShadow: `0 25px 50px -12px var(--shadow-color)` }}
           >
             {/* Animated Border Background */}
-            <div className="absolute inset-0 rounded-[20px] bg-[#1a1f2e] overflow-hidden pointer-events-none">
+            <div
+              className="absolute inset-0 rounded-[20px] overflow-hidden pointer-events-none"
+              style={{ backgroundColor: "var(--bg-card)" }}
+            >
               {/* Single Synchronized Spinning Wrapper — paused by default, plays on hover */}
               <div className="absolute top-1/2 left-1/2 aspect-square w-[200%] origin-center -translate-x-1/2 -translate-y-1/2 animate-[spin_4s_linear_infinite] [animation-play-state:paused] group-hover:[animation-play-state:running] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                 {/* Blurred Glow Beam */}
-                <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0_240deg,rgba(232,226,213,1)_360deg)] blur-md" />
+                <div
+                  className="absolute inset-0 blur-md"
+                  style={{
+                    background: "conic-gradient(from 0deg, transparent 0 240deg, var(--text-heading) 360deg)",
+                    opacity: 0.8,
+                  }}
+                />
                 {/* Core Sharp Beam */}
-                <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0_300deg,#ffffff_360deg)]" />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: "conic-gradient(from 0deg, transparent 0 300deg, var(--text-heading) 360deg)",
+                  }}
+                />
               </div>
               {/* Inner Mask */}
-              <div className="absolute inset-[2px] rounded-[18px] bg-[#1a1f2e]" />
+              <div
+                className="absolute inset-[2px] rounded-[18px]"
+                style={{ backgroundColor: "var(--bg-card)" }}
+              />
             </div>
 
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 h-full">
@@ -95,7 +116,11 @@ export default function ProjectsSection() {
                     href={project.githubUrl || "#"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-20 w-20 items-center justify-center rounded-full bg-white text-black shadow-lg transition-all duration-300 hover:bg-neutral-300 hover:scale-105"
+                    className="flex h-20 w-20 items-center justify-center rounded-full shadow-lg transition-all duration-300 hover:scale-105"
+                    style={{
+                      backgroundColor: "var(--text-heading)",
+                      color: "var(--bg-card)",
+                    }}
                   >
                     <GithubIcon className="h-9 w-9" />
                   </a>
@@ -103,7 +128,11 @@ export default function ProjectsSection() {
                     href={project.liveUrl || "#"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-20 w-20 items-center justify-center rounded-full bg-white text-black shadow-lg transition-all duration-300 hover:bg-neutral-300 hover:scale-105"
+                    className="flex h-20 w-20 items-center justify-center rounded-full shadow-lg transition-all duration-300 hover:scale-105"
+                    style={{
+                      backgroundColor: "var(--text-heading)",
+                      color: "var(--bg-card)",
+                    }}
                   >
                     <ExternalLink className="h-9 w-9" strokeWidth={2} />
                   </a>
@@ -111,10 +140,16 @@ export default function ProjectsSection() {
 
                 {/* Bottom Content Area */}
                 <div>
-                  <h3 className="text-3xl md:text-[3rem] font-black text-[#e8e2d5] tracking-tight leading-none mb-4 md:mb-6">
+                  <h3
+                    className="text-3xl md:text-[3rem] font-black tracking-tight leading-none mb-4 md:mb-6"
+                    style={{ color: "var(--text-heading)" }}
+                  >
                     {project.title}
                   </h3>
-                  <p className="text-neutral-400 text-[18px] md:text-[20px] leading-[1.75] max-w-lg mb-8">
+                  <p
+                    className="text-[18px] md:text-[20px] leading-[1.75] max-w-lg mb-8"
+                    style={{ color: "var(--text-body)" }}
+                  >
                     {project.copy}
                   </p>
                   
@@ -122,11 +157,14 @@ export default function ProjectsSection() {
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
                     {project.stack.map((tech, i) => (
                       <div key={tech} className="flex items-center">
-                        <span className="text-[13px] md:text-[14px] font-mono font-semibold tracking-widest text-neutral-300 uppercase">
+                        <span
+                          className="text-[13px] md:text-[14px] font-mono font-semibold tracking-widest uppercase"
+                          style={{ color: "var(--text-body)" }}
+                        >
                           {tech}
                         </span>
                         {i !== project.stack.length - 1 && (
-                          <span className="text-neutral-600 ml-3">·</span>
+                          <span className="ml-3" style={{ color: "var(--text-dim)" }}>·</span>
                         )}
                       </div>
                     ))}
@@ -137,15 +175,31 @@ export default function ProjectsSection() {
               {/* ─── Right Column: Visual Mockup Overflow ─── */}
               <div className="relative h-[300px] sm:h-[400px] lg:h-auto w-full lg:translate-y-8 translate-y-4">
                 {/* Simulated MacBook/Window Frame */}
-                <div className="absolute top-0 right-0 w-full h-full 2xl:w-[120%] 2xl:h-[110%] rounded-xl overflow-hidden bg-[#0d121c] border border-white/10 shadow-2xl transition-transform duration-500 group-hover:-translate-y-2 group-hover:shadow-black/70">
+                <div
+                  className="absolute top-0 right-0 w-full h-full 2xl:w-[120%] 2xl:h-[110%] rounded-xl overflow-hidden border shadow-2xl transition-transform duration-500 group-hover:-translate-y-2"
+                  style={{
+                    backgroundColor: "var(--project-frame-bg)",
+                    borderColor: "var(--border-main)",
+                    boxShadow: `0 25px 50px -12px var(--shadow-color)`,
+                  }}
+                >
                   {/* Top Bar */}
-                  <div className="h-8 w-full bg-[#1e2536] flex items-center px-4 gap-2 border-b border-white/5">
+                  <div
+                    className="h-8 w-full flex items-center px-4 gap-2 border-b"
+                    style={{
+                      backgroundColor: "var(--project-topbar)",
+                      borderColor: "var(--border-card)",
+                    }}
+                  >
                     <div className="h-3 w-3 rounded-full bg-red-500/80" />
                     <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
                     <div className="h-3 w-3 rounded-full bg-green-500/80" />
                   </div>
                   {/* Mockup Display */}
-                  <div className="relative w-full h-full bg-[#080b12] flex items-center justify-center overflow-hidden">
+                  <div
+                    className="relative w-full h-full flex items-center justify-center overflow-hidden"
+                    style={{ backgroundColor: "var(--project-frame-bg)" }}
+                  >
                     {project.image ? (
                       <Image
                         src={project.image}
@@ -155,7 +209,10 @@ export default function ProjectsSection() {
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     ) : (
-                      <span className="text-neutral-700 font-mono text-[15px] uppercase tracking-widest z-10">
+                      <span
+                        className="font-mono text-[15px] uppercase tracking-widest z-10"
+                        style={{ color: "var(--text-dim)" }}
+                      >
                         {project.title} Preview
                       </span>
                     )}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 export default function CustomCursor() {
@@ -16,10 +16,16 @@ export default function CustomCursor() {
   const dotX = useTransform(mouseX, (v) => v + 17);
   const dotY = useTransform(mouseY, (v) => v + 17);
 
+  const [enabled, setEnabled] = useState(false);
+
   useEffect(() => {
-    // Hide native cursor
+    // Only run the custom cursor on devices with a precise pointer (mouse).
+    // Touch devices keep their native behavior and skip the listener entirely.
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
+    setEnabled(true);
     document.body.style.cursor = "none";
-    
+
     const moveCursor = (e: MouseEvent) => {
       // Offset by 20px to center the 40px wide jelly circle
       mouseX.set(e.clientX - 20);
@@ -33,6 +39,8 @@ export default function CustomCursor() {
       document.body.style.cursor = "auto";
     };
   }, [mouseX, mouseY]);
+
+  if (!enabled) return null;
 
   return (
     <>

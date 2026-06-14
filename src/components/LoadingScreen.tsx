@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useIntro } from "./IntroProvider";
 
 const words = ["Sleep.", "Optional.", "Apparently."];
 
@@ -10,78 +11,70 @@ const containerVariants = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.4,
+      staggerChildren: 0.18,
     }
   },
   exit: {
     opacity: 0,
     y: -20,
-    transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] as const }
+    transition: { duration: 0.3, ease: [0.76, 0, 0.24, 1] as const }
   }
 };
 
 const wordVariants = {
   hidden: { y: "100%", opacity: 0 },
-  show: { 
-    y: "0%", 
-    opacity: 1, 
-    transition: { duration: 1.5, ease: [0.76, 0, 0.24, 1] as const } 
+  show: {
+    y: "0%",
+    opacity: 1,
+    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] as const }
   }
 };
 
 export default function LoadingScreen() {
-  const [isMounted, setIsMounted] = useState(false);
-  const [shouldShow] = useState(true);
+  const { playIntro } = useIntro();
+  const [mounted, setMounted] = useState(false);
   const [stage, setStage] = useState<"words" | "dot" | "blast" | "done">("words");
 
-  // 1. Hydration & Storage Safe
-  useEffect(() => {
-    setIsMounted(true);
-    // TEMPORARILY DISABLED FOR DEVELOPMENT: 
-    // Uncomment this block before deploying to production to prevent repetition!
-    /*
-    const hasLoaded = sessionStorage.getItem("hasLoaded");
-    if (hasLoaded) {
-      setShouldShow(false);
-    } else {
-      sessionStorage.setItem("hasLoaded", "true");
-    }
-    */
-  }, []);
+  // The server always renders null (it can't know it's a repeat visit), so gate on
+  // mount to avoid a hydration mismatch. playIntro is already resolved synchronously.
+  useEffect(() => setMounted(true), []);
+  const shouldShow = mounted && playIntro;
 
   // Timeline Orchestration
   useEffect(() => {
-    if (!shouldShow || !isMounted) return;
+    if (!shouldShow) return;
 
     if (stage === "words") {
-      // Words enter sequentially (staggered by 0.4s). Total enter time ~1.5s.
-      // We hold for another 1s to let the user read them. Total 2.5s.
+      // Words enter staggered (~1.2s). Brief hold, then collapse into the dot.
       const timer = setTimeout(() => {
         setStage("dot");
-      }, 2100); 
+      }, 1200);
       return () => clearTimeout(timer);
     }
 
     if (stage === "dot") {
       const blastTimer = setTimeout(() => {
         setStage("blast");
-      }, 300); // Wait 600ms before blast
+      }, 250);
       return () => clearTimeout(blastTimer);
     }
 
     if (stage === "blast") {
       const finishTimer = setTimeout(() => {
         setStage("done");
-      }, 600); // blast duration is 1s, then cleanup
+      }, 500);
       return () => clearTimeout(finishTimer);
     }
-  }, [stage, shouldShow, isMounted]);
+  }, [stage, shouldShow]);
 
-  // If already loaded or not mounted, return null with zero visual delay
-  if (!isMounted || !shouldShow || stage === "done") return null;
+  // Skip entirely for repeat visitors / once the intro has finished.
+  if (!shouldShow || stage === "done") return null;
 
   return (
-    <div className="fixed inset-0 z-[999] flex items-center justify-center bg-[#020813] overflow-hidden">
+    <div
+      className="fixed inset-0 z-[999] flex items-center justify-center overflow-hidden"
+      style={{ backgroundColor: "var(--loading-bg)" }}
+    >
       
       {/* Stage 1: The Words */}
       <AnimatePresence>
@@ -97,7 +90,8 @@ export default function LoadingScreen() {
               <div key={index} className="overflow-hidden">
                 <motion.h2
                   variants={wordVariants}
-                  className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-black tracking-tighter text-[#e8e2d5]"
+                  className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-black tracking-tighter"
+                  style={{ color: "var(--text-heading)" }}
                 >
                   {word}
                 </motion.h2>
@@ -110,7 +104,12 @@ export default function LoadingScreen() {
       {/* Stage 2 & 3: The Transition and Blast Reveal */}
       {(stage === "dot" || stage === "blast") && (
         <motion.div
-          className="absolute bg-[#e8e2d5]"
+          className="absolute"
+          style={{
+            backgroundColor: "var(--loading-blast)",
+            width: "100vw",
+            height: "100vh",
+          }}
           initial={{ clipPath: "circle(0% at 50% 50%)" }}
           animate={{
             clipPath: stage === "blast" ? "circle(100% at 50% 50%)" : "circle(0.4% at 50% 50%)",
@@ -121,7 +120,6 @@ export default function LoadingScreen() {
             ease: [0.76, 0, 0.24, 1] as const,
             opacity: { duration: 1, times: [0, 0.8, 1], ease: "linear" }
           }}
-          style={{ width: "100vw", height: "100vh" }}
         />
       )}
     </div>

@@ -2,26 +2,32 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useIntro } from "./IntroProvider";
 
 export default function HeroSection() {
-  // Fixed at 1 for now — when sessionStorage logic is re-enabled,
-  // convert back to state: const [delayMultiplier, setDelayMultiplier] = useState(1);
-  const delayMultiplier = 1;
+  const { playIntro } = useIntro();
+  // First visit: stagger entrances behind the loading intro. Repeat visits: no
+  // intro plays, so reveal immediately instead of waiting on the old fixed delays.
+  const delayMultiplier = playIntro ? 1 : 0;
 
   return (
-    <section className="noise-overlay relative w-full h-screen overflow-hidden bg-[#0a0a0a]">
+    <section
+      className="noise-overlay relative w-full h-screen overflow-hidden"
+      style={{ backgroundColor: "var(--bg-secondary)" }}
+    >
       {/* ─── Background Image ─── */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 3.2 * delayMultiplier, duration: 2 }}
+        transition={{ delay: 1.5 * delayMultiplier, duration: 2 }}
         className="absolute inset-0 z-0"
       >
         <Image
           src="/bg.jpg"
           alt="Bokeh Background"
           fill
-          className="object-cover opacity-60"
+          className="object-cover"
+          style={{ opacity: "var(--hero-img-opacity)" }}
           priority
         />
       </motion.div>
@@ -30,8 +36,9 @@ export default function HeroSection() {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 3.2 * delayMultiplier, duration: 2 }}
+        transition={{ delay: 1.5 * delayMultiplier, duration: 2 }}
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden mix-blend-screen"
+        style={{ opacity: "var(--spotlight-opacity)" }}
       >
         {/* Blob 1 — top-center dominant spotlight */}
         <div
@@ -63,13 +70,14 @@ export default function HeroSection() {
       <div className="relative z-10 flex h-full w-full items-center justify-center -translate-y-12 md:-translate-y-20">
         <div className="relative select-none text-center flex flex-col items-center">
           <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 3.7 * delayMultiplier, duration: 2, ease: [0.16, 1, 0.3, 1] }}
-            className="font-black tracking-[-0.04em] text-[#dfdcd6]"
+            initial={{ opacity: 0, y: 120, clipPath: "inset(100% 0% -10% 0%)" }}
+            animate={{ opacity: 1, y: 0, clipPath: "inset(0% 0% -10% 0%)" }}
+            transition={{ delay: 2.5 * delayMultiplier, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="font-black tracking-[-0.04em]"
             style={{
               fontSize: "clamp(6rem, min(20vw, 38vh), 20vw)",
               lineHeight: "0.7",
+              color: "var(--text-hero)",
             }}
           >
             <span className="block">Austin</span>
@@ -80,7 +88,7 @@ export default function HeroSection() {
           <motion.div
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ delay: 3.9 * delayMultiplier, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 2.1 * delayMultiplier, duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="absolute z-30 flex flex-col items-center"
             style={{
               top: "78%", 
@@ -101,7 +109,15 @@ export default function HeroSection() {
               }}
             >
               {/* Avatar Card */}
-              <div className="group relative h-[220px] w-[220px] cursor-pointer rounded-[20px] bg-[#2a2a2a] transition-colors duration-[400ms] ease-[ease] hover:bg-[#7B5CF0] shadow-2xl shadow-black/80 md:h-[260px] md:w-[260px] lg:h-[280px] lg:w-[280px] border-[1px] border-white/10">
+              <div
+                className="group relative h-[220px] w-[220px] cursor-pointer rounded-[20px] transition-colors duration-[400ms] ease-[ease] hover:bg-[#7B5CF0] shadow-2xl md:h-[260px] md:w-[260px] lg:h-[280px] lg:w-[280px]"
+                style={{
+                  backgroundColor: "var(--bg-card)",
+                  borderWidth: "1px",
+                  borderColor: "var(--border-main)",
+                  boxShadow: `0 25px 50px -12px var(--shadow-color)`,
+                }}
+              >
                 
                 {/* Image Mask (crops image but lets badge overflow parent) */}
                 <div className="absolute inset-0 overflow-hidden rounded-[20px]">
@@ -116,7 +132,14 @@ export default function HeroSection() {
                 </div>
 
                 {/* Hover Status Badge */}
-                <div className="absolute bottom-[30%] -left-[15%] md:-left-[20%] flex items-center gap-2 rounded-full bg-[#111111]/85 p-1 pr-4 text-[13px] text-white opacity-0 -translate-x-[10px] pointer-events-none transition-all duration-[400ms] ease-[ease] group-hover:opacity-100 group-hover:translate-x-0 shadow-xl border border-white/10 whitespace-nowrap z-20">
+                <div
+                  className="absolute bottom-[30%] -left-[15%] md:-left-[20%] flex items-center gap-2 rounded-full p-1 pr-4 text-[13px] text-white opacity-0 -translate-x-[10px] pointer-events-none transition-all duration-[400ms] ease-[ease] group-hover:opacity-100 group-hover:translate-x-0 shadow-xl whitespace-nowrap z-20"
+                  style={{
+                    backgroundColor: "rgba(17, 17, 17, 0.85)",
+                    borderWidth: "1px",
+                    borderColor: "var(--border-main)",
+                  }}
+                >
                   <div className="flex items-center gap-2 rounded-full bg-[#b5f23d] px-3 py-1.5 text-[#111] font-semibold tracking-tight">
                     <span className="relative flex h-2 w-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-600 opacity-75"></span>
@@ -136,16 +159,22 @@ export default function HeroSection() {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 4.1 * delayMultiplier, duration: 1.5 }}
+        transition={{ delay: 1.9 * delayMultiplier, duration: 1.5 }}
         className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 flex flex-col gap-4 p-6 md:flex-row md:items-end md:justify-between md:px-12 md:py-10 lg:px-16 lg:py-12"
       >
         {/* Bottom-Left */}
-        <p className="max-w-[320px] text-[14px] font-medium leading-relaxed text-neutral-300 md:max-w-[400px] md:text-[15px] lg:max-w-[420px] lg:text-[25px]">
+        <p
+          className="max-w-[320px] text-[14px] font-medium leading-relaxed md:max-w-[400px] md:text-[15px] lg:max-w-[420px] lg:text-[25px]"
+          style={{ color: "var(--text-body)" }}
+        >
           I am currently looking for opportunities to grow and showcase my skills.
         </p>
 
         {/* Bottom-Right */}
-        <p className="max-w-[320px] text-[14px] font-medium leading-relaxed text-neutral-300 md:max-w-[400px] md:text-right md:text-[15px] lg:max-w-[450px] lg:text-[25px]">
+        <p
+          className="max-w-[320px] text-[14px] font-medium leading-relaxed md:max-w-[400px] md:text-right md:text-[15px] lg:max-w-[450px] lg:text-[25px]"
+          style={{ color: "var(--text-body)" }}
+        >
           Focused on interfaces and experiences, working remotely from Mumbai, India.
         </p>
       </motion.div>

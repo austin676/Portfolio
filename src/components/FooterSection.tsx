@@ -4,7 +4,11 @@ import { motion } from "framer-motion";
 
 export default function FooterSection() {
   return (
-    <footer className="relative w-full bg-[#000000] pt-24 pb-8 px-6 md:px-16 overflow-hidden">
+    <footer
+      id="contact"
+      className="relative w-full pt-24 pb-8 px-6 md:px-16 overflow-hidden"
+      style={{ backgroundColor: "var(--bg-footer)" }}
+    >
       
       {/* ─── Climax Typographic Headline ─── */}
       <motion.div
@@ -55,7 +59,7 @@ export default function FooterSection() {
         {/* Right Column (Social Matrix Network) */}
         <div className="flex flex-wrap md:justify-end gap-8 md:gap-12 mt-8 md:mt-0">
           <a
-            href="https://linkedin.com/in/austinsharma" // Placeholder, user will update if needed
+            href="https://linkedin.com/in/austin-sharma-029297300"
             target="_blank"
             rel="noopener noreferrer"
             className="text-neutral-400 hover:text-white uppercase tracking-wider text-sm md:text-base font-semibold transition-colors duration-300"

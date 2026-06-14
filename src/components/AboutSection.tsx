@@ -145,7 +145,7 @@ export default function AboutSection() {
           {/* ════════════════════════════════════════════════════
               ROW 1 — Portrait Image + Editorial Narrative
               ════════════════════════════════════════════════════ */}
-          <div className="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-16 md:gap-20 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-16 md:gap-20 items-start">
 
             {/* ─── LEFT: Portrait Photo Card ─── */}
             <motion.div
@@ -153,7 +153,7 @@ export default function AboutSection() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
-              className="relative mx-auto lg:mx-0 w-full max-w-[380px] lg:max-w-none"
+              className="relative mx-auto lg:mx-0 w-full max-w-[320px] lg:max-w-none"
             >
               {/* Outer glow ring */}
               <div className="absolute -inset-[2px] rounded-[24px] bg-gradient-to-br from-white/15 via-transparent to-white/5 pointer-events-none" />
@@ -173,7 +173,7 @@ export default function AboutSection() {
                   alt="Austin Sharma — Portrait"
                   fill
                   className="object-cover object-top"
-                  sizes="(max-width: 1024px) 380px, 420px"
+                  sizes="(max-width: 1024px) 320px, 340px"
                   priority
                 />
                 {/* Subtle bottom gradient for blending */}
@@ -238,7 +238,7 @@ export default function AboutSection() {
               <motion.p
                 custom={1}
                 variants={lineReveal}
-                className="mb-8 text-[21px] leading-[1.75] md:text-[24px] lg:text-[28px]"
+                className="mb-8 text-[18px] leading-[1.7] md:text-[20px] lg:text-[22px]"
                 style={{ color: "var(--text-body)" }}
               >
                 I architect{" "}
@@ -260,7 +260,7 @@ export default function AboutSection() {
               <motion.p
                 custom={2}
                 variants={lineReveal}
-                className="mb-8 text-[21px] leading-[1.75] md:text-[24px] lg:text-[28px]"
+                className="mb-8 text-[18px] leading-[1.7] md:text-[20px] lg:text-[22px]"
                 style={{ color: "var(--text-body)" }}
               >
                 Off-screen, I compete in{" "}
@@ -277,7 +277,7 @@ export default function AboutSection() {
               <motion.p
                 custom={3}
                 variants={lineReveal}
-                className="text-[21px] leading-[1.75] md:text-[24px] lg:text-[28px]"
+                className="text-[18px] leading-[1.7] md:text-[20px] lg:text-[22px]"
                 style={{ color: "var(--text-body)" }}
               >
                 Engineering student at{" "}
@@ -322,11 +322,13 @@ export default function AboutSection() {
             </motion.div>
 
             {/* Skill Domains — responsive multi-column grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-12 gap-y-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-10">
               {skillDomains.map((domain) => (
                 <motion.div
                   key={domain.category}
                   variants={skillGroupReveal}
+                  className="px-5 sm:[&:nth-child(2n)]:border-l-2 lg:[&:nth-child(3n+1)]:border-l-0 lg:[&:nth-child(3n+2)]:border-l-2 lg:[&:nth-child(3n)]:border-l-2 xl:[&:nth-child(4n+1)]:border-l-0 xl:[&:nth-child(4n+2)]:border-l-2 xl:[&:nth-child(4n+3)]:border-l-2 xl:[&:nth-child(4n)]:border-l-2"
+                  style={{ borderColor: "var(--text-hero)" }}
                 >
                   <h3
                     className="mb-3 text-[18px] font-bold uppercase tracking-[0.2em] md:text-[20px]"

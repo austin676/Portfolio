@@ -67,7 +67,7 @@ export default function HeroSection() {
       </motion.div>
 
       {/* ─── Typography Layer (Center Focus) ─── */}
-      <div className="relative z-10 flex h-full w-full items-center justify-center -translate-y-12 md:-translate-y-20">
+      <div className="relative z-10 flex h-full w-full items-center justify-center -translate-y-[6vh] md:-translate-y-20">
         <div className="relative select-none text-center flex flex-col items-center">
           <motion.h1
             initial={{ opacity: 0, y: 120, clipPath: "inset(100% 0% -10% 0%)" }}
@@ -75,8 +75,8 @@ export default function HeroSection() {
             transition={{ delay: 2.5 * delayMultiplier, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             className="font-black tracking-[-0.04em]"
             style={{
-              fontSize: "clamp(3.5rem, min(18vw, 38vh), 20vw)",
-              lineHeight: "0.8",
+              fontSize: "clamp(4.5rem, min(25vw, 38vh), 15rem)",
+              lineHeight: "0.82",
               color: "var(--text-hero)",
             }}
           >
@@ -85,17 +85,13 @@ export default function HeroSection() {
           </motion.h1>
 
           {/* ─── Floating Avatar Card ─── */}
+          {/* Mobile: sits in flow below the name. Desktop: absolute, overlapping the name. */}
+          <div className="relative z-30 mt-10 flex justify-center md:absolute md:left-[60%] md:top-[78%] md:mt-0 md:-translate-x-[85%]">
           <motion.div
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ delay: 2.1 * delayMultiplier, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute z-30 flex flex-col items-center"
-            style={{
-              top: "78%", 
-              left: "60%",
-              x: "-85%",
-              marginTop: "0px",
-            }}
+            className="flex flex-col items-center"
           >
             <motion.div
               data-cursor-text="Open"
@@ -147,11 +143,12 @@ export default function HeroSection() {
                     </span>
                     Open to Internships
                   </div>
-                  <span className="font-medium text-neutral-300">— DM or call</span>
+                  <span className="font-medium text-neutral-300">— Mail or call</span>
                 </div>
               </div>
             </motion.div>
           </motion.div>
+          </div>
         </div>
       </div>
 
@@ -160,19 +157,31 @@ export default function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.9 * delayMultiplier, duration: 1.5 }}
-        className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 flex flex-col gap-4 p-6 md:flex-row md:items-end md:justify-between md:px-12 md:py-10 lg:px-16 lg:py-12"
+        className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 flex flex-col gap-4 px-6 pb-20 md:flex-row md:items-end md:justify-between md:gap-6 md:px-12 md:py-10 lg:px-16 lg:py-12"
       >
+        {/* Mobile-only accent hairline */}
+        <div
+          className="h-px w-10 opacity-40 md:hidden"
+          style={{ backgroundColor: "var(--text-body)" }}
+        />
+
         {/* Bottom-Left */}
         <p
-          className="max-w-[320px] text-[14px] font-medium leading-relaxed md:max-w-[400px] md:text-[15px] lg:max-w-[420px] lg:text-[25px]"
+          className="max-w-[340px] text-[15px] font-medium leading-relaxed tracking-tight md:max-w-[400px] md:text-[15px] md:tracking-normal lg:max-w-[420px] lg:text-[25px]"
           style={{ color: "var(--text-body)" }}
         >
-          I am currently looking for opportunities to grow and showcase my skills.
+          Designing and shipping solutions that measurably move the needle.
         </p>
+
+        {/* Mobile-only divider between the two lines */}
+        <div
+          className="h-px w-full opacity-10 md:hidden"
+          style={{ backgroundColor: "var(--text-body)" }}
+        />
 
         {/* Bottom-Right */}
         <p
-          className="max-w-[320px] text-[14px] font-medium leading-relaxed md:max-w-[400px] md:text-right md:text-[15px] lg:max-w-[450px] lg:text-[25px]"
+          className="max-w-[340px] text-[15px] font-medium leading-relaxed tracking-tight md:max-w-[400px] md:text-right md:text-[15px] md:tracking-normal lg:max-w-[450px] lg:text-[25px]"
           style={{ color: "var(--text-body)" }}
         >
           Focused on interfaces and experiences, working remotely from Mumbai, India.

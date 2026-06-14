@@ -75,7 +75,7 @@ export default function HeroSection() {
             transition={{ delay: 2.5 * delayMultiplier, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             className="font-black tracking-[-0.04em]"
             style={{
-              fontSize: "clamp(4.5rem, min(25vw, 38vh), 15rem)",
+              fontSize: "clamp(3.5rem, min(20vw, 32vh), 12rem)",
               lineHeight: "0.82",
               color: "var(--text-hero)",
             }}
@@ -106,7 +106,7 @@ export default function HeroSection() {
             >
               {/* Avatar Card */}
               <div
-                className="group relative h-[220px] w-[220px] cursor-pointer rounded-[20px] transition-colors duration-[400ms] ease-[ease] hover:bg-[#7B5CF0] shadow-2xl md:h-[260px] md:w-[260px] lg:h-[280px] lg:w-[280px]"
+                className="group relative h-[170px] w-[170px] cursor-pointer rounded-[20px] transition-colors duration-[400ms] ease-[ease] hover:bg-[#7B5CF0] shadow-2xl md:h-[200px] md:w-[200px] lg:h-[220px] lg:w-[220px]"
                 style={{
                   backgroundColor: "var(--bg-card)",
                   borderWidth: "1px",
@@ -122,7 +122,7 @@ export default function HeroSection() {
                     alt="Austin Sharma — Developer Portrait"
                     fill
                     className="object-cover grayscale brightness-[0.85] transition-all duration-[400ms] ease-[ease] group-hover:grayscale-0 group-hover:brightness-100"
-                    sizes="(max-width: 768px) 220px, 280px"
+                    sizes="(max-width: 768px) 170px, 220px"
                     priority
                   />
                 </div>

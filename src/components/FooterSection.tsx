@@ -24,7 +24,7 @@ export default function FooterSection() {
           className="h-[20vw] w-[20vw] max-h-[280px] max-w-[280px] min-h-[90px] min-w-[90px] flex-shrink-0 rounded-full border border-neutral-700 shadow-xl bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/Pic2.jpg')", backgroundSize: "135%" }}
         />
-        <h2 className="font-black tracking-tighter text-[#e8e2d5] text-[clamp(96px,18vw,260px)] leading-none select-none">
+        <h2 className="font-black tracking-tighter text-[#e8e2d5] text-[clamp(64px,13vw,190px)] leading-none select-none">
           LET&apos;S TALK
         </h2>
       </motion.div>
